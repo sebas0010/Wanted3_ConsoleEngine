@@ -18,10 +18,11 @@ public:
 	static Vector2 Up;
 	static Vector2 Right;
 
-private:
+public:
 	// x, y ÁÂÇ¥
 	int x = 0;
 	int y = 0;
 
+private:
 	char* value = nullptr;
 };

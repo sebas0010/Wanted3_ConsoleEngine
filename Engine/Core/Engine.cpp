@@ -60,13 +60,34 @@ void Engine::Run()
 		// 고정 프레임.
 		if (deltaTime >= oneFrameTime)
 		{
-			Update(deltaTime);
+			Tick(deltaTime);
 			Render();
 
 			// 시간 업데이트.
 			previousTime = currentTime;
+
+			// 현재 프레임의 입력 기록
+			for (int ix = 0; ix < 255; ++ix)
+			{
+				keyStates[ix].previousKeyDown = keyStates[ix].isKeyDown;
+			}
 		}
 	}
+}
+
+bool Engine::GetKey(int keyCode)
+{
+	return keyStates[keyCode].isKeyDown;
+}
+
+bool Engine::GetKeyDown(int keyCode)
+{
+	return !keyStates[keyCode].previousKeyDown && keyStates[keyCode].isKeyDown;
+}
+
+bool Engine::GetKeyUp(int keyCode)
+{
+	return keyStates[keyCode].previousKeyDown && !keyStates[keyCode].isKeyDown;
 }
 
 void Engine::Quit()
@@ -77,20 +98,18 @@ void Engine::Quit()
 
 void Engine::ProcessInput()
 {
-	// ESC키 눌림 확인.
-	if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+	// 키 입력 확인
+	for (int ix = 0; ix < 255; ++ix)
 	{
-		// 종료.
-		Quit();
+		keyStates[ix].isKeyDown = GetAsyncKeyState(ix) & 0x8000;
 	}
 }
 
-void Engine::Update(float deltaTime)
+void Engine::Tick(float deltaTime)
 {
-	std::cout 
-		<< "DeltaTime: " << deltaTime 
-		<< ", FPS: " <<  (1.0f / deltaTime)
-		<< "\n";
+	if (GetKeyDown(VK_ESCAPE)) Quit();
+
+
 }
 
 void Engine::Render()

@@ -6,7 +6,7 @@ class Engine_API Vector2
 {
 public:
 	Vector2(int x = 0, int y = 0);
-	~Vector2() = default;
+	~Vector2();
 
 	Vector2 operator+(const Vector2& other) const;
 	Vector2 operator-(const Vector2& other) const;
@@ -22,4 +22,6 @@ private:
 	// x, y ÁÂÇ¥
 	int x = 0;
 	int y = 0;
+
+	char* value = nullptr;
 };
