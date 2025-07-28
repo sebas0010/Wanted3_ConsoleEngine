@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{104319CE-35E2-4379-BB7E-7883CAB96E51}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{863029D6-C616-4F83-935D-A15719244610}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{90C1B432-76C0-4111-BEF2-1F63977C7B6E}"
 	ProjectSection(ProjectDependencies) = postProject
-		{104319CE-35E2-4379-BB7E-7883CAB96E51} = {104319CE-35E2-4379-BB7E-7883CAB96E51}
+		{863029D6-C616-4F83-935D-A15719244610} = {863029D6-C616-4F83-935D-A15719244610}
 	EndProjectSection
 EndProject
 Global
@@ -18,14 +18,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Debug|x64.ActiveCfg = Debug|x64
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Debug|x64.Build.0 = Debug|x64
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Debug|x86.ActiveCfg = Debug|Win32
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Debug|x86.Build.0 = Debug|Win32
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Release|x64.ActiveCfg = Release|x64
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Release|x64.Build.0 = Release|x64
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Release|x86.ActiveCfg = Release|Win32
-		{104319CE-35E2-4379-BB7E-7883CAB96E51}.Release|x86.Build.0 = Release|Win32
+		{863029D6-C616-4F83-935D-A15719244610}.Debug|x64.ActiveCfg = Debug|x64
+		{863029D6-C616-4F83-935D-A15719244610}.Debug|x64.Build.0 = Debug|x64
+		{863029D6-C616-4F83-935D-A15719244610}.Debug|x86.ActiveCfg = Debug|Win32
+		{863029D6-C616-4F83-935D-A15719244610}.Debug|x86.Build.0 = Debug|Win32
+		{863029D6-C616-4F83-935D-A15719244610}.Release|x64.ActiveCfg = Release|x64
+		{863029D6-C616-4F83-935D-A15719244610}.Release|x64.Build.0 = Release|x64
+		{863029D6-C616-4F83-935D-A15719244610}.Release|x86.ActiveCfg = Release|Win32
+		{863029D6-C616-4F83-935D-A15719244610}.Release|x86.Build.0 = Release|Win32
 		{90C1B432-76C0-4111-BEF2-1F63977C7B6E}.Debug|x64.ActiveCfg = Debug|x64
 		{90C1B432-76C0-4111-BEF2-1F63977C7B6E}.Debug|x64.Build.0 = Debug|x64
 		{90C1B432-76C0-4111-BEF2-1F63977C7B6E}.Debug|x86.ActiveCfg = Debug|Win32

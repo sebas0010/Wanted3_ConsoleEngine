@@ -1,5 +1,7 @@
 #include "Engine.h"
 #include <iostream>
+#include "Level/Level.h"
+#include <Windows.h>
 //#include <chrono>
 
 // 2가지.
@@ -7,12 +9,32 @@
 // 단순 입력 처리(키보드).
 // 타이머(시간 계산).
 
+// 정적 변수 초기화.
+Engine* Engine::instance = nullptr;
+
 Engine::Engine()
 {
+	instance = this;
+
+	// 콘솔 커서 끄기.
+	CONSOLE_CURSOR_INFO info;
+	info.bVisible = false;
+	info.dwSize = 1;
+
+	SetConsoleCursorInfo(
+		GetStdHandle(STD_OUTPUT_HANDLE),
+		&info
+	);
 }
 
 Engine::~Engine()
 {
+	// 레벨 삭제.
+	if (mainLevel)
+	{
+		delete mainLevel;
+		mainLevel = nullptr;
+	}
 }
 
 void Engine::Run()
@@ -60,19 +82,38 @@ void Engine::Run()
 		// 고정 프레임.
 		if (deltaTime >= oneFrameTime)
 		{
+			BeginPlay();
 			Tick(deltaTime);
 			Render();
 
 			// 시간 업데이트.
 			previousTime = currentTime;
 
-			// 현재 프레임의 입력 기록
+			// 현재 프레임의 입력을 기록.
 			for (int ix = 0; ix < 255; ++ix)
 			{
-				keyStates[ix].previousKeyDown = keyStates[ix].isKeyDown;
+				keyStates[ix].previouseKeyDown 
+					= keyStates[ix].isKeyDown;
 			}
 		}
 	}
+
+	// 정리(텍스트 색상 원래대로 돌려놓기).
+	SetConsoleTextAttribute(
+		GetStdHandle(STD_OUTPUT_HANDLE),
+		FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
+	);
+}
+
+void Engine::AddLevel(Level* newLevel)
+{
+	// 기존에 있던 레벨은 제거.
+	if (mainLevel)
+	{
+		delete mainLevel;
+	}
+
+	mainLevel = newLevel;
 }
 
 bool Engine::GetKey(int keyCode)
@@ -82,12 +123,14 @@ bool Engine::GetKey(int keyCode)
 
 bool Engine::GetKeyDown(int keyCode)
 {
-	return !keyStates[keyCode].previousKeyDown && keyStates[keyCode].isKeyDown;
+	return !keyStates[keyCode].previouseKeyDown 
+		&& keyStates[keyCode].isKeyDown;
 }
 
 bool Engine::GetKeyUp(int keyCode)
 {
-	return keyStates[keyCode].previousKeyDown && !keyStates[keyCode].isKeyDown;
+	return keyStates[keyCode].previouseKeyDown
+		&& !keyStates[keyCode].isKeyDown;
 }
 
 void Engine::Quit()
@@ -96,22 +139,77 @@ void Engine::Quit()
 	isQuit = true;
 }
 
+Engine& Engine::Get()
+{
+	return *instance;
+}
+
 void Engine::ProcessInput()
 {
-	// 키 입력 확인
+	// 키 입력 확인.
 	for (int ix = 0; ix < 255; ++ix)
 	{
-		keyStates[ix].isKeyDown = GetAsyncKeyState(ix) & 0x8000;
+		keyStates[ix].isKeyDown 
+			= GetAsyncKeyState(ix) & 0x8000;
+	}
+
+	// ESC키 눌림 확인.
+	//if (GetAsyncKeyState(VK_ESCAPE) & 0x8000)
+	//{
+	//	// 종료.
+	//	Quit();
+	//}
+}
+
+void Engine::BeginPlay()
+{
+	if (mainLevel)
+	{
+		mainLevel->BeginPlay();
 	}
 }
 
 void Engine::Tick(float deltaTime)
 {
-	if (GetKeyDown(VK_ESCAPE)) Quit();
+	//std::cout 
+	//	<< "DeltaTime: " << deltaTime 
+	//	<< ", FPS: " <<  (1.0f / deltaTime)
+	//	<< "\n";
 
+	//if (GetKeyDown('A'))
+	//{
+	//	std::cout << "KeyDown\n";
+	//}
+	//if (GetKey('A'))
+	//{
+	//	std::cout << "Key\n";
+	//}
+	//if (GetKeyUp('A'))
+	//{
+	//	std::cout << "KeyUp\n";
+	//}
 
+	// 레벨 업데이트.
+	if (mainLevel)
+	{
+		mainLevel->Tick(deltaTime);
+	}
+
+	//if (GetKeyDown(VK_ESCAPE))
+	//{
+	//	Quit();
+	//}
 }
 
 void Engine::Render()
 {
+	SetConsoleTextAttribute(
+		GetStdHandle(STD_OUTPUT_HANDLE),
+		FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
+	);
+
+	if (mainLevel)
+	{
+		mainLevel->Render();
+	}
 }

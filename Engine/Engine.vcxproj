@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{104319ce-35e2-4379-bb7e-7883cab96e51}</ProjectGuid>
+    <ProjectGuid>{863029d6-c616-4f83-935d-a15719244610}</ProjectGuid>
     <RootNamespace>Engine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -70,19 +70,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Intermediate\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
@@ -98,13 +98,13 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy *.h ..\Includes /y /e </Command>
+    </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\Engine.lib ..\Lib\Engine\ /y
 xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>xcopy *.h ..\Includes /y /e</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -120,13 +120,13 @@ xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy *.h ..\Includes /y /e </Command>
+    </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\Engine.lib ..\Lib\Engine\ /y
 xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>xcopy *.h ..\Includes /y /e</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -140,13 +140,13 @@ xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy *.h ..\Includes /y /e </Command>
+    </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\Engine.lib ..\Lib\Engine\ /y
 xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>xcopy *.h ..\Includes /y /e</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -162,26 +162,27 @@ xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>xcopy *.h ..\Includes /y /e </Command>
+    </PreBuildEvent>
     <PostBuildEvent>
       <Command>xcopy $(OutDir)\Engine.lib ..\Lib\Engine\ /y
 xcopy $(OutDir)\Engine.dll ..\Lib\Engine\ /y</Command>
     </PostBuildEvent>
-    <PreBuildEvent>
-      <Command>xcopy *.h ..\Includes /y /e</Command>
-    </PreBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor\Actor.h" />
+    <ClInclude Include="Core\Core.h" />
+    <ClInclude Include="Core\Engine.h" />
+    <ClInclude Include="Core\RTTI.h" />
+    <ClInclude Include="Level\Level.h" />
+    <ClInclude Include="Math\Vector2.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor\Actor.cpp" />
     <ClCompile Include="Core\Engine.cpp" />
     <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Actor\Actor.h" />
-    <ClInclude Include="Core\Core.h" />
-    <ClInclude Include="Core\Engine.h" />
-    <ClInclude Include="Level\Level.h" />
-    <ClInclude Include="Math\Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

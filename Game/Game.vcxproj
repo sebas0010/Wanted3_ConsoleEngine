@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{90c1b432-76c0-4111-bef2-1f63977c7b6e}</ProjectGuid>
+    <ProjectGuid>{a06a0a0f-1ac8-4cf5-b2eb-04f80b41f85f}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -92,16 +92,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;$(ProjectDir)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
       <AdditionalDependencies>Engine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Lib\Engine\Engine.dll $(Outdir)\ /y</Command>
+      <Command>xcopy ..\Lib\Engine\Engine.dll $(OutDir)\ /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -112,16 +112,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;$(ProjectDir)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
       <AdditionalDependencies>Engine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Lib\Engine\Engine.dll $(Outdir)\ /y</Command>
+      <Command>xcopy ..\Lib\Engine\Engine.dll $(OutDir)\ /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -130,16 +130,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;$(ProjectDir)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
       <AdditionalDependencies>Engine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Lib\Engine\Engine.dll $(Outdir)\ /y</Command>
+      <Command>xcopy ..\Lib\Engine\Engine.dll $(OutDir)\ /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -150,20 +150,38 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Includes\;..\Includes\Core\;$(ProjectDir)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
       <AdditionalDependencies>Engine.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Lib\Engine\;</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy ..\Lib\Engine\Engine.dll $(Outdir)\ /y</Command>
+      <Command>xcopy ..\Lib\Engine\Engine.dll $(OutDir)\ /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor\Box.cpp" />
+    <ClCompile Include="Actor\Ground.cpp" />
+    <ClCompile Include="Actor\Player.cpp" />
+    <ClCompile Include="Actor\Target.cpp" />
+    <ClCompile Include="Actor\Wall.cpp" />
+    <ClCompile Include="Demo\DemoLevel.cpp" />
+    <ClCompile Include="Level\SokobanLevel.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Demo\TestActor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Actor\Box.h" />
+    <ClInclude Include="Actor\Ground.h" />
+    <ClInclude Include="Actor\Player.h" />
+    <ClInclude Include="Actor\Target.h" />
+    <ClInclude Include="Actor\Wall.h" />
+    <ClInclude Include="Demo\DemoLevel.h" />
+    <ClInclude Include="Demo\TestActor.h" />
+    <ClInclude Include="Level\SokobanLevel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,28 +3,24 @@
 #include "Core.h"
 #include <Windows.h>
 
-
 /*
- Todo:
- - 키 입력 관리.
- - 입력 확인 함수 (GetKey, GetKeyDown, GetKeyUp).
-
- - Entity 추가 (Actor).
- - 이벤트 함수 추가 (BeginPlay, Tick, Render).
- - Level 추가 (가상 공간에 배치된 물체(Actor) 관리 객체).
+* Todo: 2025년 7월 25일 작업할 것.
+  - 엔진을 싱글톤(singleton)으로 만들기.
 */
 
-
+class Level;
 class Engine_API Engine
 {
-	// 키 입력 확인을 위한 구조체
+	// 키입력 확인을 위한 구조체 선언.
 	struct KeyState
 	{
-		// 현재 프레임 키 눌림 여부
+		// 현재 프레임에 키가 눌렸는지 여부.
 		bool isKeyDown = false;
-		// 이전 프레임 키 눌림 여부
-		bool previousKeyDown = false;
+
+		// 이전 프레임에 키가 눌렸는지 여부.
+		bool previouseKeyDown = false;
 	};
+
 public:
 
 	// 생성자.
@@ -36,6 +32,9 @@ public:
 	// 엔진 실행 함수.
 	void Run();
 
+	// 레벨 추가 함수.
+	void AddLevel(Level* newLevel);
+
 	// 키 확인 함수.
 	bool GetKey(int keyCode);
 	bool GetKeyDown(int keyCode);
@@ -44,13 +43,26 @@ public:
 	// 종료 함수.
 	void Quit();
 
+	// 싱글톤 접근 함수.
+	static Engine& Get();
+
 private:
 	void ProcessInput();
+
+	void BeginPlay();
 	void Tick(float deltaTime = 0.0f);
 	void Render();
 
 private:
 	// 엔진 종료 플래그.
 	bool isQuit = false;
-	KeyState keyStates[255] = { };
+
+	// 키 입력 정보 관리 변수.
+	KeyState keyStates[256] = { };
+
+	// 메인 레벨.
+	Level* mainLevel = nullptr;
+
+	// 싱글톤 변수.
+	static Engine* instance;
 };
