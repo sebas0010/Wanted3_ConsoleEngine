@@ -60,8 +60,53 @@ void Level::Tick(float deltaTime)
 
 void Level::Render()
 {
+	// 그리기 전에 정렬 순서 기준으로 재배치(정렬)
+	SortActorsBySortingOrder();
+
+	// Render Pass
 	for (Actor* const actor : actors)
-	{
+	{	
+		// 검사 (같은 위치에 정렬 순서 높은 액터가 있는지 확인)
+		Actor* searchedActor = nullptr;
+		for (Actor* const otherActor : actors)
+		{
+			// 같은 액터면 무시
+			if (actor == otherActor) continue;
+
+			// 위치가 같은 액터 확인
+			if (actor->Position() == otherActor->Position())
+			{
+				// 정렬 순서 비교 후 액터 저장
+				if (actor->sortingOrder < otherActor->sortingOrder)
+				{
+					// 저장 및 루프 종료
+					searchedActor = otherActor;
+					break;
+				}
+			}
+		}
+		
+		if (searchedActor)
+		{
+			continue;
+		}
+
+		// 드로우 콜
 		actor->Render();
+	}
+}
+
+void Level::SortActorsBySortingOrder()
+{
+	for (int ix = 0; ix < (int)actors.size(); ++ix)
+	{
+		for (int jx = 0; jx < (int)actors.size()-1; ++jx)
+		{
+			if (actors[jx]->sortingOrder > actors[jx + 1]->sortingOrder)
+			{
+				//  두 액터 위치 교환
+				std::swap(actors[jx], actors[jx + 1]);
+			}
+		}
 	}
 }

@@ -22,6 +22,7 @@ enum class Color : int
 
 class Engine_API Actor : public RTTI
 {
+	friend class Level;
 	RTTI_DECLARATIONS(Actor, RTTI)
 
 public:
@@ -50,6 +51,9 @@ public:
 	void SetPosition(const Vector2& newPosition);
 	Vector2 Position() const;
 
+	// Sorting Order 설정 함수
+	void SetSortingOrder(unsigned int sortingOrder);
+
 private:
 	// 개체의 위치.
 	Vector2 position;
@@ -62,4 +66,7 @@ private:
 
 	// BeginPlay 호출이 되었는지 확인.
 	bool hasBeganPlay = false;
+
+	// 정렬 순서
+	unsigned int sortingOrder = 0;
 };

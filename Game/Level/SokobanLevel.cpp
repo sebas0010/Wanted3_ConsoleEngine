@@ -87,11 +87,17 @@ void SokobanLevel::ReadMapFile(const char* filename)
 			//std::cout << ".";
 			break;
 		case 'p':
+			// 땅도 같이 생성
+			AddActor(new Ground(position));
+
 			// Player 액터 생성.
 			AddActor(new Player(position));
 			//std::cout << "p";
 			break;
 		case 'b':
+			// 땅도 같이 생성
+			AddActor(new Ground(position));
+
 			AddActor(new Box(position));
 			//std::cout << "b";
 			break;
