@@ -15,6 +15,12 @@
 #define Engine_API __declspec(dllimport)
 #endif
 
+#ifdef _DEBUG
+#define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#else
+#define new new
+#endif
+
 // 메모리 정리 함수.
 template<typename T>
 void SafeDelete(T*& target)

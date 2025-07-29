@@ -1,11 +1,12 @@
 #include "Input.h"
 #include <Windows.h>
 
+// static 변수 정의.
 Input* Input::instance = nullptr;
 
 Input::Input()
 {
-	// 싱글톤 실행을 위해 instance 변수 설정
+	// 싱글톤 실행을 위해 instance 변수 설정.
 	instance = this;
 }
 
@@ -19,9 +20,8 @@ void Input::ProcessInput()
 	}
 }
 
-void Input::SavePreviousKeyStates()
+void Input::SavePreviouseKeyStates()
 {
-	// 현재 프레임의 입력을 기록
 	for (int ix = 0; ix < 255; ++ix)
 	{
 		keyStates[ix].previouseKeyDown

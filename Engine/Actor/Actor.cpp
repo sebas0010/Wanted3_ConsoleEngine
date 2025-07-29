@@ -1,7 +1,9 @@
 #include "Actor.h"
+#include "Utils/Utils.h"
+#include "Engine.h"
+
 #include <Windows.h>
 #include <iostream>
-#include "Utils/Utils.h";
 
 Actor::Actor(const char image, Color color, const Vector2& position)
 	: image(image), color(color), position(position)
@@ -30,7 +32,7 @@ void Actor::Render()
 	// 커서 위치 이동.
 
 	// 콘솔 출력을 제어하는 핸들 얻어오기.
-	// static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	//static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	// 커서 위치 값 생성.
 	COORD coord;
@@ -38,11 +40,11 @@ void Actor::Render()
 	coord.Y = (short)position.y;
 
 	// 커서 이동.
-	// SetConsoleCursorPosition(handle, coord);
+	//SetConsoleCursorPosition(handle, coord);
 	Utils::SetConsolePosition(coord);
 
 	// 색상 설정.
-	// SetConsoleTextAttribute(handle, (WORD)color);
+	//SetConsoleTextAttribute(handle, (WORD)color);
 	Utils::SetConsoleTextColor(static_cast<WORD>(color));
 
 	// 그리기.
@@ -51,7 +53,7 @@ void Actor::Render()
 
 void Actor::SetPosition(const Vector2& newPosition)
 {
-	// static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	//static HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	// 커서 위치 값 생성.
 	COORD coord;
@@ -59,8 +61,9 @@ void Actor::SetPosition(const Vector2& newPosition)
 	coord.Y = (short)position.y;
 
 	// 커서 이동.
-	// SetConsoleCursorPosition(handle, coord);
+	//SetConsoleCursorPosition(handle, coord);
 	Utils::SetConsolePosition(coord);
+
 	std::cout << ' ';
 
 	position = newPosition;
@@ -74,4 +77,19 @@ Vector2 Actor::Position() const
 void Actor::SetSortingOrder(unsigned int sortingOrder)
 {
 	this->sortingOrder = sortingOrder;
+}
+
+void Actor::SetOwner(Level* newOwner)
+{
+	owner = newOwner;
+}
+
+Level* Actor::GetOwner()
+{
+	return owner;
+}
+
+void Actor::QuitGame()
+{
+	Engine::Get().Quit();
 }

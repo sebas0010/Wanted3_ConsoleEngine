@@ -20,8 +20,8 @@ public:
 
 	// 레벨 추가 함수.
 	void AddLevel(Level* newLevel);
-	
-	// 메모리 해제 함수
+
+	// 메모리 해제 함수.
 	void CleanUp();
 
 	// 종료 함수.
@@ -42,7 +42,7 @@ private:
 	// 메인 레벨.
 	Level* mainLevel = nullptr;
 
-	// 입력 관리자
+	// 입력 관리자.
 	Input input;
 
 	// 싱글톤 변수.

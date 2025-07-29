@@ -4,9 +4,9 @@
 
 class Engine_API Input
 {
-	//friend 선언
+	// friend 선언.
 	friend class Engine;
-	
+
 	// 키입력 확인을 위한 구조체 선언.
 	struct KeyState
 	{
@@ -29,11 +29,12 @@ public:
 
 private:
 	void ProcessInput();
-	void SavePreviousKeyStates();
+	void SavePreviouseKeyStates();
 
 private:
-	static Input* instance;
 
 	// 키 입력 정보 관리 변수.
 	KeyState keyStates[256] = { };
+
+	static Input* instance;
 };

@@ -1,10 +1,10 @@
 #include "Engine.h"
 #include <iostream>
-#include "Level/Level.h"
 #include <Windows.h>
+
+#include "Level/Level.h"
 #include "Utils/Utils.h"
 #include "Input.h"
-//#include <chrono>
 
 // 정적 변수 초기화.
 Engine* Engine::instance = nullptr;
@@ -14,12 +14,13 @@ BOOL WINAPI ConsoleMessageProcedure(DWORD CtrlType)
 	switch (CtrlType)
 	{
 	case CTRL_CLOSE_EVENT:
-		// Engine의 메모리 해제
-		// Todo: Engined에 메모리 해제 함수 추가 후 호출
-		// Engine::Get().~Engine();
+		// Engine의 메모리 해제.
+		//Engine::Get().~Engine();
 		Engine::Get().CleanUp();
 		return false;
 	}
+
+	return false;
 }
 
 Engine::Engine()
@@ -36,7 +37,7 @@ Engine::Engine()
 		&info
 	);
 
-	// 콘솔 창 이벤트 등록
+	// 콘솔 창 이벤트 등록.
 	SetConsoleCtrlHandler(ConsoleMessageProcedure, TRUE);
 }
 
@@ -97,8 +98,8 @@ void Engine::Run()
 			// 시간 업데이트.
 			previousTime = currentTime;
 
-			// 현재 프레임의 입력을 기록
-			input.SavePreviousKeyStates();
+			// 현재 프레임의 입력을 기록.
+			input.SavePreviouseKeyStates();
 		}
 	}
 
@@ -123,11 +124,11 @@ void Engine::CleanUp()
 {
 	// 레벨 삭제.
 	SafeDelete(mainLevel);
-	/*if (mainLevel)
-	{
-		delete mainLevel;
-		mainLevel = nullptr;
-	}*/
+	//if (mainLevel)
+	//{
+	//	delete mainLevel;
+	//	mainLevel = nullptr;
+	//}
 }
 
 void Engine::Quit()
@@ -183,10 +184,10 @@ void Engine::Tick(float deltaTime)
 
 void Engine::Render()
 {
-	/*SetConsoleTextAttribute(
-		GetStdHandle(STD_OUTPUT_HANDLE),
-		FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
-	);*/
+	//SetConsoleTextAttribute(
+	//	GetStdHandle(STD_OUTPUT_HANDLE),
+	//	FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED
+	//);
 
 	Utils::SetConsoleTextColor(
 		FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED

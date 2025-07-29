@@ -32,7 +32,9 @@ void Level::AddActor(Actor* newActor)
 
 	// push_back/emplace_back: 배열 맨 뒤에 새로운 항목 추가하는 함수.
 	actors.emplace_back(newActor);
-	//actors.push_back(newActor);
+	
+	// 오너십 설정.
+	newActor->SetOwner(this);
 }
 
 // 엔진 이벤트 함수.
@@ -60,51 +62,58 @@ void Level::Tick(float deltaTime)
 
 void Level::Render()
 {
-	// 그리기 전에 정렬 순서 기준으로 재배치(정렬)
+	// 그리기 전에 정렬 순서 기준으로 재배치(정렬).
 	SortActorsBySortingOrder();
 
-	// Render Pass
+	// Render Pass.
 	for (Actor* const actor : actors)
-	{	
-		// 검사 (같은 위치에 정렬 순서 높은 액터가 있는지 확인)
+	{
+		// 검사 (같은 위치에 정렬 순서 높은 액터가 있는지 확인).
 		Actor* searchedActor = nullptr;
 		for (Actor* const otherActor : actors)
 		{
-			// 같은 액터면 무시
-			if (actor == otherActor) continue;
+			// 같은 액터면 무시.
+			if (actor == otherActor)
+			{
+				continue;
+			}
 
-			// 위치가 같은 액터 확인
+			// 위치가 같은 액터 확인.
 			if (actor->Position() == otherActor->Position())
 			{
-				// 정렬 순서 비교 후 액터 저장
+				// 정렬 순서 비교 후 액터 저장.
 				if (actor->sortingOrder < otherActor->sortingOrder)
 				{
-					// 저장 및 루프 종료
+					// 저장 및 루프 종료.
 					searchedActor = otherActor;
 					break;
 				}
 			}
 		}
-		
+
+		// 어떤 액터와 같은 위치에 정렬 순서가 더 높은 액터가 있으면,
+		// 그리지 않고 건너뛰기.
 		if (searchedActor)
 		{
 			continue;
 		}
 
-		// 드로우 콜
+		// 드로우 콜.
 		actor->Render();
 	}
 }
 
 void Level::SortActorsBySortingOrder()
 {
+	// 버블 정렬.
 	for (int ix = 0; ix < (int)actors.size(); ++ix)
 	{
-		for (int jx = 0; jx < (int)actors.size()-1; ++jx)
+		for (int jx = 0; jx < (int)actors.size() - 1; ++jx)
 		{
+			// sortingOrder 값이 클수록 뒤 쪽에 배치.
 			if (actors[jx]->sortingOrder > actors[jx + 1]->sortingOrder)
 			{
-				//  두 액터 위치 교환
+				// 두 액터 위치 교환.
 				std::swap(actors[jx], actors[jx + 1]);
 			}
 		}
