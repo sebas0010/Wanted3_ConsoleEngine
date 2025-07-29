@@ -11,7 +11,10 @@
 
 SokobanLevel::SokobanLevel()
 {
-	ReadMapFile("Map.txt");
+	//ReadMapFile("Map.txt");
+	ReadMapFile("Stage1.txt");
+	//ReadMapFile("Stage2.txt");
+	//ReadMapFile("Stage3.txt");
 }
 
 void SokobanLevel::ReadMapFile(const char* filename)
@@ -79,6 +82,7 @@ void SokobanLevel::ReadMapFile(const char* filename)
 		switch (mapCharacter)
 		{
 		case '#':
+		case '1':
 			AddActor(new Wall(position));
 			//std::cout << "#";
 			break;
