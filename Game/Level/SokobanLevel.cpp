@@ -6,7 +6,7 @@
 #include "Actor/Ground.h"
 #include "Actor/Box.h"
 #include "Actor/Target.h"
-
+#include "Utils/Utils.h"
 #include <iostream>
 
 SokobanLevel::SokobanLevel()
@@ -265,4 +265,19 @@ bool SokobanLevel::CanPlayerMove(
 
 	// ???.
 	return false;
+}
+
+void SokobanLevel::Render()
+{
+	super::Render();
+	
+	if (isGameClear)
+	{
+		Utils::SetConsolePosition({ 30, 0 });
+		Utils::SetConsoleTextColor(
+			static_cast<WORD>(Color::White)
+		);
+
+		std::cout << "Game Clear!";
+	}
 }
